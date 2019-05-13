@@ -47,3 +47,4 @@ spring:
     mypassword: 1234
     result: 成功
     myusername: admin
+    myimge: http://47.100.164.146:8080/girl-0.0.1-SNAPSHOT/img/tx1.png

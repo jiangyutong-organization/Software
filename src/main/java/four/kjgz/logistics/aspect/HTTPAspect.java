@@ -53,19 +53,19 @@ public class HTTPAspect {
     public void  dobefore(JoinPoint joinPoint)
     {
 
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        //url
-        logger.info("url={}",request.getRequestURI());
-        //method
-        logger.info("method={}",request.getMethod());
-        //ip
-        logger.info("ip={}",request.getRemoteAddr());
-        //类方法
-        logger.info("class_method={}",joinPoint.getSignature().getDeclaringTypeName()+"."+joinPoint.getSignature().getName());
-        //参数
-        logger.info("args={}",joinPoint.getArgs());
-        System.out.println("jyt");
+//        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//        HttpServletRequest request = attributes.getRequest();
+//        //url
+//        logger.info("url={}",request.getRequestURI());
+//        //method
+//        logger.info("method={}",request.getMethod());
+//        //ip
+//        logger.info("ip={}",request.getRemoteAddr());
+//        //类方法
+//        logger.info("class_method={}",joinPoint.getSignature().getDeclaringTypeName()+"."+joinPoint.getSignature().getName());
+//        //参数
+//        logger.info("args={}",joinPoint.getArgs());
+//        System.out.println("jyt");
     }
     @After("log()")
     public void  logTwo(JoinPoint joinPoint)

@@ -8,13 +8,21 @@ public class loginInfo {
     private  String mypassword;
     private String result;
     private  String myusername;
-
+    private String myimge;
     public String getResult() {
         return result;
     }
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getMyimge() {
+        return myimge;
+    }
+
+    public void setMyimge(String myimge) {
+        this.myimge = myimge;
     }
 
     public String getMyusernum() {
