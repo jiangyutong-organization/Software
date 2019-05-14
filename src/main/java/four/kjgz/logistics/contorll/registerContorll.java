@@ -1,5 +1,6 @@
 package four.kjgz.logistics.contorll;
 
+import com.alibaba.fastjson.JSONObject;
 import four.kjgz.logistics.bean.*;
 import four.kjgz.logistics.repository.AdministratorsReposity;
 import four.kjgz.logistics.repository.CustomerReposity;
@@ -7,10 +8,7 @@ import four.kjgz.logistics.repository.StaffReposity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Random;
 
@@ -24,9 +22,9 @@ public class registerContorll {
     @Autowired
     StaffReposity staffReposity;
     @MyLog(value = "添加用户")  //这里添加了AOP的自定义注解
-    @PostMapping(value = "/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @CrossOrigin(origins = "http://localhost:8080")    //注解用于存储数据时的跨域问题
-    public  Object register(@RequestParam("action") Integer action,
+    public  String register(@RequestParam("action") Integer action,
                             @RequestParam("username") String username,
                             @RequestParam("password") String password,
                             @RequestParam("email") String email,
@@ -63,10 +61,20 @@ public class registerContorll {
             if(administratorsReposity.save(administrators)==null)
             {
                 logger.error("注册失败");
-                return "注册失败";
+                JSONObject result = new JSONObject();
+                result.put("sts", "0");
+                result.put("msg", "注册失败");
+                return result.toJSONString();
+
             }
             else
-                return  administratorsReposity.save(administrators);
+            {
+                JSONObject result = new JSONObject();
+                result.put("sts", "1");
+                result.put("msg", "注册成功");
+                result.put("ourdata", administratorsReposity.save(administrators));
+                return  result.toJSONString();
+            }
 
 
         }
@@ -96,10 +104,19 @@ public class registerContorll {
             if(staffReposity.save(staff)==null)
             {
                 logger.error("注册失败");
-                return "注册失败";
+                JSONObject result = new JSONObject();
+                result.put("sts", "0");
+                result.put("msg", "注册失败");
+                return result.toJSONString();
             }
             else
-                return  staffReposity.save(staff);
+            {
+                JSONObject result = new JSONObject();
+                result.put("sts", "1");
+                result.put("msg", "注册成功");
+                result.put("ourdata", staffReposity.save(staff));
+                return  result.toJSONString();
+            }
 
         }
         else //插入顾客
@@ -129,11 +146,20 @@ public class registerContorll {
             customer.setSex(sex);
             if(customerReposity.save(customer)==null)
             {
-                logger.error("注册失败");
-                return "注册失败";
+                JSONObject result = new JSONObject();
+                result.put("sts", "0");
+                result.put("msg", "注册失败");
+                return result.toJSONString();
             }
             else
-                return  customerReposity.save(customer);
+            {
+                JSONObject result = new JSONObject();
+                result.put("sts", "1");
+                result.put("msg", "注册成功");
+                result.put("ourdata", customerReposity.save(customer));
+                return  result.toJSONString();
+            }
+
         }
     }
 }

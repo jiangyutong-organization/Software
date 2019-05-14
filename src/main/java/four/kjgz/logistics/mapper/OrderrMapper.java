@@ -28,6 +28,9 @@ public interface OrderrMapper {
     @Select("select * from Orderr where cid = #{cid}")
     public List<Orderr> selectOrdersBySid(Integer cid);
 
+    @Select("select * from Orderr")
+    public List<Orderr> selectAll();
+
     @Select("select count(id) from Orderr")
     public int getCount();
 }
